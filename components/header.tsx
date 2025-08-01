@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navItems = [
@@ -27,21 +27,15 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
   const pathname = usePathname();
 
-  // Function to determine which section is currently in view
   const determineActiveSection = useCallback(() => {
     const sections = navItems.map((item) => item.href.substring(1));
-
-    // Add the sections that are not in the navbar but still need to be detected
     const allSections = [...sections, "open-source", "skills"];
 
-    // Find the section that is currently in view
     for (let i = allSections.length - 1; i >= 0; i--) {
       const section = document.getElementById(allSections[i]);
       if (section) {
         const rect = section.getBoundingClientRect();
-        // If the section is in the viewport (with some buffer for better UX)
         if (rect.top <= 150 && rect.bottom >= 150) {
-          // Map to the closest navbar item if it's not in the navbar
           const sectionId = allSections[i];
           if (sectionId === "open-source") return "projects";
           if (sectionId === "skills") return "experience";
@@ -51,7 +45,6 @@ export default function Header() {
       }
     }
 
-    // Default to home if no section is in view
     return "home";
   }, []);
 
@@ -62,29 +55,78 @@ export default function Header() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Initial check
+
     setActiveSection(determineActiveSection());
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [determineActiveSection]);
 
-  // Smooth scroll to section when clicking nav items
   const scrollToSection = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
     e.preventDefault();
+    e.stopPropagation();
+
     const targetId = href.substring(1);
     const element = document.getElementById(targetId);
+
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80, // Offset for header height
-        behavior: "smooth",
-      });
-      setActiveSection(targetId);
-      if (isOpen) setIsOpen(false);
+      // Close mobile menu first
+      if (isOpen) {
+        setIsOpen(false);
+      }
+
+      // Small delay to allow menu to close
+      setTimeout(
+        () => {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+
+          setActiveSection(targetId);
+        },
+        isOpen ? 300 : 0,
+      );
     }
   };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isOpen && !target.closest("header")) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   return (
     <header
@@ -171,7 +213,7 @@ export default function Header() {
             size="icon"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
-            className="relative"
+            className="relative z-60"
           >
             <motion.div
               initial={false}
@@ -193,36 +235,63 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <motion.div
-        className="md:hidden overflow-hidden"
-        initial={{ height: 0 }}
-        animate={{ height: isOpen ? "auto" : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-      >
-        <div className="container py-4 bg-background/95 backdrop-blur-sm">
-          <nav className="flex flex-col space-y-4">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.substring(1);
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="md:hidden fixed top-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border/50 shadow-lg"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="container py-4">
+              <nav className="flex flex-col space-y-2">
+                {navItems.map((item, index) => {
+                  const isActive = activeSection === item.href.substring(1);
 
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => scrollToSection(e, item.href)}
-                  className={cn(
-                    "text-sm font-medium transition-colors py-2 px-3 rounded-md",
-                    isActive
-                      ? "bg-primary/10 text-primary font-semibold"
-                      : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
-                  )}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-      </motion.div>
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.2, delay: index * 0.05 }}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={(e) => scrollToSection(e, item.href)}
+                        className={cn(
+                          "block text-sm font-medium transition-colors py-3 px-4 rounded-md border-l-4 border-transparent hover:border-primary/50",
+                          isActive
+                            ? "bg-primary/10 text-primary font-semibold border-primary"
+                            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="md:hidden fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setIsOpen(false)}
+            style={{ top: "4rem" }} // Start below header
+          />
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -9,13 +9,14 @@ export default function Skills() {
         "JavaScript",
         "TypeScript",
         "React.js",
+        "Next.js",
         "HTML/CSS",
         "Tailwind CSS",
       ],
     },
     {
       category: "Backend",
-      skills: ["Node.js", "Python", "React.js", "Express.js", "RESTful APIs"],
+      skills: ["Node.js", "Python", "React.js", "Express.js"],
     },
     {
       category: "Database",

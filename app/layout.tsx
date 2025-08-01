@@ -11,10 +11,11 @@ export const metadata: Metadata = {
   keywords: [
     "YuuraHz",
     "Adi Saputra",
-    "Full Stack Developer",
+    "Backend Developer",
     "JavaScript",
     "TypeScript",
     "React",
+    "Next.js",
     "Node.js",
     "AWS",
   ],
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "http://localhost:3000",
+    url: "https://yuura.xyz",
     title: "YuuraHz | Portofolio",
     description:
       "Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
