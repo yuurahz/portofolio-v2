@@ -45,7 +45,7 @@ export default function Hero() {
             </Button>
             <Button variant="ghost" size="icon" asChild>
               <Link
-                href="https://instagram/this.adiii_"
+                href="https://instagram.com/this.adiii_"
                 target="_blank"
                 rel="noopener noreferrer"
               >
