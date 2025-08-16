@@ -7,7 +7,7 @@ export default function About() {
       icon: <Code2 className="h-10 w-10 text-primary" />,
       title: "Backend Development",
       description:
-        "specialize in JavaScript technologies and enjoy turning complex problems into simple, beautiful solutions",
+        "specialize in NodeJs technologies and enjoy turning complex problems into simple, beautiful solutions",
     },
     {
       icon: <Brain className="h-10 w-10 text-primary" />,

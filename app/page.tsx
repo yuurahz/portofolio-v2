@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "YuuraHz | Portofolio",
   description:
-    "Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
+    "Passionate developer specializing in NodeJs. I create modern web applications with clean code and exceptional user experiences.",
 };
 
 export default function Home() {

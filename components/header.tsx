@@ -15,10 +15,10 @@ const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
+  { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Education", href: "#education" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact Me", href: "#contact" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Header() {
@@ -37,8 +37,6 @@ export default function Header() {
         const rect = section.getBoundingClientRect();
         if (rect.top <= 150 && rect.bottom >= 150) {
           const sectionId = allSections[i];
-          if (sectionId === "open-source") return "projects";
-          if (sectionId === "skills") return "experience";
           if (!sections.includes(sectionId)) return "home";
           return sectionId;
         }
@@ -72,12 +70,10 @@ export default function Header() {
     const element = document.getElementById(targetId);
 
     if (element) {
-      // Close mobile menu first
       if (isOpen) {
         setIsOpen(false);
       }
 
-      // Small delay to allow menu to close
       setTimeout(
         () => {
           const headerOffset = 80;
@@ -97,7 +93,6 @@ export default function Header() {
     }
   };
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -115,7 +110,6 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

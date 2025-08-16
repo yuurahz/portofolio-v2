@@ -1,13 +1,16 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Skills from "./skills-content";
+import { motion } from "framer-motion";
 
 export default function Experience() {
   const experiences = [
     {
       title: "Backend Developer",
       company: "Senior High School",
-      period: "2020 - Present",
+      period: "2023 - Present",
       location: "Lampung, Indonesia",
       achievements: [
         "Leading the engineering team in developing innovative healthcare solutions for Web Application",
@@ -17,7 +20,23 @@ export default function Experience() {
         "Collaborating with product and design teams to deliver exceptional user experiences",
       ],
     },
+    {
+      title: "Bot Developer",
+      company: "Senior High School",
+      period: "2020 - 2023",
+      location: "Lampung, Indonesia",
+      achievements: [
+        "Learn about the system and logic of a bot",
+        "Learning the JavaScript programming language",
+        "Implementing a programming algorithm structure to design and assemble a bot",
+      ],
+    },
   ];
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.95, y: 40 },
+    visible: { opacity: 1, scale: 1, y: 0 },
+  };
 
   return (
     <section id="experience" className="py-20">
@@ -25,17 +44,26 @@ export default function Experience() {
         <div className="space-y-12">
           <div className="space-y-4 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Experience
+              EXPERIENCE
             </h2>
             <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               My professional journey and key accomplishments
             </p>
           </div>
 
-          <div className="space-y-8 mt-12">
+          <motion.div
+            className="space-y-8 mt-12"
+            initial="hidden"
+            whileInView="visible"
+            transition={{ staggerChildren: 0.15 }}
+          >
             {experiences.map((experience, index) => (
-              <div key={index} className="timeline-item">
-                <Card className="border-l-4 border-l-primary transition-all duration-300 hover:shadow-lg">
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <Card className="border-l-4 border-l-primary transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:animate-glowPulse">
                   <CardContent className="p-6">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div>
@@ -67,9 +95,9 @@ export default function Experience() {
                     </ul>
                   </CardContent>
                 </Card>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Skills Section */}
           <div className="mt-20" id="skills">
@@ -77,6 +105,23 @@ export default function Experience() {
           </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes glowPulse {
+          0% {
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0.2);
+          }
+          50% {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+          }
+          100% {
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0.2);
+          }
+        }
+        .animate-glowPulse {
+          animation: glowPulse 1.5s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

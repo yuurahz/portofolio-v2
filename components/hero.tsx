@@ -21,9 +21,7 @@ export default function Hero() {
                 <span>Backend Developer</span>
               </span>
               <noscript>
-                <span>
-                  Backend Developer | JavaScript Expert | AWS Specialist
-                </span>
+                <span>Backend Developer | JavaScript Expert</span>
               </noscript>
             </p>
           </div>
@@ -45,7 +43,7 @@ export default function Hero() {
             </Button>
             <Button variant="ghost" size="icon" asChild>
               <Link
-                href="https://instagram.com/this.adiii_"
+                href="https://instagram.com/adi.sptrraa"
                 target="_blank"
                 rel="noopener noreferrer"
               >

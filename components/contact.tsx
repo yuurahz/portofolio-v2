@@ -33,7 +33,7 @@ export default function Contact() {
           <div className="space-y-12">
             <div className="space-y-4 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Get In Touch
+                GET IN TOUCH
               </h2>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Have a project in mind or want to discuss opportunities? I'd

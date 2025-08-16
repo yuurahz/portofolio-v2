@@ -8,17 +8,7 @@ export const metadata: Metadata = {
   title: "YuuraHz | Portofolio",
   description:
     "Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
-  keywords: [
-    "YuuraHz",
-    "Adi Saputra",
-    "Backend Developer",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "AWS",
-  ],
+  keywords: ["YuuraHz", "Adi Saputra", "Backend Developer"],
   authors: [{ name: "Adi Saputra" }],
   creator: "Adi Saputra",
   icons: {
