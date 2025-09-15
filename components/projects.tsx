@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion"; // Animasi
+import { motion } from "framer-motion";
 
 export default function Projects() {
   const projects = [
@@ -42,8 +42,8 @@ export default function Projects() {
         "A powered Telegram bot with natural language processing, smart replies, and integration with external APIs for enhanced functionality.",
       tech: ["NodeJs", "Telegram API", "Algorithm", "Webhooks"],
       highlights: ["AI-Powered", "Natural Language", "Real-time Processing"],
-      githubLink: null,
-      visitLink: "https://t.me/yoshx_bot",
+      githubLink: "https://github.com/yuurahz/yoru",
+      visitLink: null,
     },
     {
       title: "Powerful Rest APIs",
