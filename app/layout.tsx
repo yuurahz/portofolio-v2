@@ -1,67 +1,66 @@
-import type React from "react";
-import type { Metadata } from "next";
 import { Analytics } from "@/components/analytics";
-import ClientLayout from "./client";
+import type { Metadata } from "next";
+import type React from "react";
 import { Suspense } from "react";
+import ClientLayout from "./client";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "YuuraHz | Portofolio",
-  description:
-    "Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
-  keywords: ["YuuraHz", "Adi Saputra", "Backend Developer"],
-  authors: [{ name: "Adi Saputra" }],
-  creator: "Adi Saputra",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/svg+xml" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png" }],
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://yuura.xyz",
-    title: "YuuraHz | Portofolio",
-    description:
-      "Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
-    siteName: "YuuraHz Portfolio",
-    images: [
-      {
-        url: "/favicon.png",
-        width: 512,
-        height: 512,
-        alt: "YuuraHz",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "YuuraHz | Portofolio",
-    description:
-      "Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
-    creator: "@yuurahz",
-    images: ["/favicon.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+	title: "YuuraHz | Portofolio",
+	description:
+		"Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
+	keywords: ["YuuraHz", "Adi Saputra", "Backend Developer"],
+	authors: [{ name: "Adi Saputra" }],
+	creator: "Adi Saputra",
+	icons: {
+		icon: [
+			{ url: "/favicon.ico", sizes: "any" },
+			{ url: "/icon.png", type: "image/svg+xml" },
+		],
+		apple: [{ url: "/apple-touch-icon.png" }],
+	},
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: "https://yuurahz.is-a.dev",
+		title: "YuuraHz | Portofolio",
+		description:
+			"Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
+		siteName: "YuuraHz Portfolio",
+		images: [
+			{
+				url: "/favicon.png",
+				width: 512,
+				height: 512,
+				alt: "YuuraHz",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "YuuraHz | Portofolio",
+		description:
+			"Passionate developer specializing in JavaScript technologies. I create modern web applications with clean code and exceptional user experiences.",
+		creator: "@yuurahz",
+		images: ["/favicon.png"],
+	},
+	robots: {
+		index: true,
+		follow: true,
+	},
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <>
-      <Suspense>
-        <ClientLayout>{children}</ClientLayout>
-      </Suspense>
-      <Analytics />
-    </>
-  );
+	return (
+		<>
+			<Suspense>
+				<ClientLayout>{children}</ClientLayout>
+			</Suspense>
+			<Analytics />
+		</>
+	);
 }
-
-import "./globals.css";

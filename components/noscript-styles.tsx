@@ -1,9 +1,9 @@
 export default function NoScriptStyles() {
-  return (
-    <noscript>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
+	return (
+		<noscript>
+			<style
+				dangerouslySetInnerHTML={{
+					__html: `
         /* Hide elements that require JavaScript */
         .js-only {
           display: none !important;
@@ -55,8 +55,8 @@ export default function NoScriptStyles() {
           display: none;
         }
       `,
-        }}
-      />
-    </noscript>
-  );
+				}}
+			/>
+		</noscript>
+	);
 }
