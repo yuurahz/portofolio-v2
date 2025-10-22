@@ -21,8 +21,8 @@ export default function Contact() {
 		{
 			icon: <Phone className="h-6 w-6 text-primary" />,
 			title: "Phone",
-			value: "+62 823-7593-3838",
-			link: "https://wa.me/6282375933838",
+			value: "+62 823-xxxx-xxx",
+			link: "https://wa.me/628xxxxxx",
 		},
 	];
 
@@ -46,7 +46,7 @@ export default function Contact() {
 								<Card>
 									<CardContent className="p-6">
 										<form
-											action="https://formspree.io/f/xwpqqwjb"
+											action="https://formspree.io/f/"
 											method="POST"
 											className="space-y-6"
 										>
